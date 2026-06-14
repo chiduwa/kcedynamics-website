@@ -30,12 +30,12 @@ jobs:
           echo "Bing ping → HTTP $STATUS"
 
   # ── 2. LIGHTHOUSE CI ────────────────────────────────────────────────────────
-  # Runs weekly and on every push. Audits all 6 public pages.
+  # Runs weekly (schedule only) — needs the live site to be up on Hostinger.
   # Download HTML reports from the Actions → Artifacts tab.
   lighthouse:
     name: Lighthouse performance audit
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'push'
+    if: github.event_name == 'schedule'
     steps:
       - uses: actions/checkout@v4
 
