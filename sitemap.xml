@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage — highest priority -->
+  <url>
+    <loc>https://kcedynamics.com/</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/" />
+  </url>
+
+  <!-- Services — second priority (most search-relevant) -->
+  <url>
+    <loc>https://kcedynamics.com/services.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/services.html" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/services.html" />
+  </url>
+
+  <!-- About — brand and E-E-A-T signal -->
+  <url>
+    <loc>https://kcedynamics.com/about.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/about.html" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/about.html" />
+  </url>
+
+  <!-- Projects — portfolio / proof of work -->
+  <url>
+    <loc>https://kcedynamics.com/projects.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/projects.html" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/projects.html" />
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://kcedynamics.com/contact.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/contact.html" />
+  </url>
+
+  <!-- Careers -->
+  <url>
+    <loc>https://kcedynamics.com/careers.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/careers.html" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/careers.html" />
+  </url>
+
+</urlset>

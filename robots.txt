@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kcedynamics.com/sitemap.xml
+
+# Note: /assets/ is intentionally crawlable so Google can
+# render CSS and JS for accurate page-quality scoring.
+# Do NOT Disallow /assets/ on a static site.

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="KCE Dynamics">
+  <!--
+    KCE Dynamics Limited — Favicon
+    HK Group palette: #1C1C1C background · #C29F53 muted-gold mark
+  -->
+
+  <!-- Background: rounded dark charcoal square -->
+  <rect width="64" height="64" rx="9" ry="9" fill="#1C1C1C"/>
+
+  <!-- K: vertical stem -->
+  <rect x="7" y="8" width="9" height="48" fill="#C29F53"/>
+
+  <!-- K: upper arm triangle -->
+  <polygon points="16,8 38,8 16,29" fill="#C29F53"/>
+
+  <!-- K: lower arm triangle -->
+  <polygon points="16,32 38,56 16,56" fill="#C29F53"/>
+
+  <!-- Scaffolding: two near-horizontal beams extending upper-right -->
+  <line x1="24" y1="5"    x2="60" y2="16"   stroke="#C29F53" stroke-width="3.5" stroke-linecap="square"/>
+  <line x1="24" y1="13.5" x2="60" y2="24.5" stroke="#C29F53" stroke-width="3.5" stroke-linecap="square"/>
+
+  <!-- Scaffolding: two vertical poles -->
+  <line x1="44" y1="21" x2="44" y2="57" stroke="#C29F53" stroke-width="3.5" stroke-linecap="square"/>
+  <line x1="54" y1="18" x2="54" y2="57" stroke="#C29F53" stroke-width="3.5" stroke-linecap="square"/>
+</svg>

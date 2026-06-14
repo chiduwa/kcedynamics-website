@@ -1,0 +1,128 @@
+name: SEO & Performance Monitor
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Weekly Lighthouse audit — every Monday at 8:00 AM UTC
+    - cron: '0 8 * * 1'
+    # Monthly sitemap + dateModified refresh — 1st of every month at 6:00 AM UTC
+    - cron: '0 6 1 * *'
+
+jobs:
+  # ── 1. PING SEARCH ENGINES ─────────────────────────────────────────────────
+  # Runs on every push so Google + Bing learn about updates immediately.
+  ping-search-engines:
+    name: Ping Google & Bing with sitemap
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Ping Google
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://www.google.com/ping?sitemap=https://kcedynamics.com/sitemap.xml")
+          echo "Google ping → HTTP $STATUS"
+
+      - name: Ping Bing
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://www.bing.com/ping?sitemap=https://kcedynamics.com/sitemap.xml")
+          echo "Bing ping → HTTP $STATUS"
+
+  # ── 2. LIGHTHOUSE CI ────────────────────────────────────────────────────────
+  # Runs weekly and on every push. Audits all 6 public pages.
+  # Download HTML reports from the Actions → Artifacts tab.
+  lighthouse:
+    name: Lighthouse performance audit
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Audit — Home
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: https://kcedynamics.com/
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+
+      - name: Audit — About
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: https://kcedynamics.com/about.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+
+      - name: Audit — Services
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: https://kcedynamics.com/services.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+
+      - name: Audit — Projects
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: https://kcedynamics.com/projects.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+
+      - name: Audit — Contact
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: https://kcedynamics.com/contact.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+
+      - name: Audit — Careers
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: https://kcedynamics.com/careers.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+
+  # ── 3. REFRESH SITEMAP + dateModified ───────────────────────────────────────
+  # Runs on the 1st of each month. Updates sitemap <lastmod> AND all JSON-LD
+  # dateModified fields, commits back to main, then pings search engines.
+  refresh-dates:
+    name: Update sitemap & dateModified
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update all dates to today
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          # Sitemap lastmod
+          sed -i "s|<lastmod>[0-9-]*</lastmod>|<lastmod>$TODAY</lastmod>|g" sitemap.xml
+          # JSON-LD dateModified in every HTML file
+          for f in *.html; do
+            sed -i "s|\"dateModified\": \"[0-9-]*\"|\"dateModified\": \"$TODAY\"|g" "$f"
+          done
+          echo "Updated to $TODAY"
+
+      - name: Commit updated files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: refresh sitemap lastmod + dateModified"
+          file_pattern: "sitemap.xml *.html"
+          commit_user_name: "SEO Monitor Bot"
+          commit_user_email: "actions@github.com"
+
+      - name: Ping search engines after refresh
+        run: |
+          curl -s "https://www.google.com/ping?sitemap=https://kcedynamics.com/sitemap.xml" \
+            -o /dev/null -w "Google ping → HTTP %{http_code}\n"
+          curl -s "https://www.bing.com/ping?sitemap=https://kcedynamics.com/sitemap.xml" \
+            -o /dev/null -w "Bing ping → HTTP %{http_code}\n"
