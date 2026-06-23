@@ -8,6 +8,7 @@ on:
     - cron: '0 8 * * 1'
     # Monthly sitemap + dateModified refresh — 1st of every month at 6:00 AM UTC
     - cron: '0 6 1 * *'
+  workflow_dispatch:
 
 jobs:
   # ── 1. PING SEARCH ENGINES ─────────────────────────────────────────────────
@@ -35,7 +36,7 @@ jobs:
   lighthouse:
     name: Lighthouse performance audit
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
 
@@ -44,6 +45,7 @@ jobs:
         with:
           urls: https://kcedynamics.com/
           uploadArtifacts: true
+          artifactName: lighthouse-results-home
           temporaryPublicStorage: true
           runs: 1
 
@@ -52,6 +54,7 @@ jobs:
         with:
           urls: https://kcedynamics.com/about.html
           uploadArtifacts: true
+          artifactName: lighthouse-results-about
           temporaryPublicStorage: true
           runs: 1
 
@@ -60,6 +63,7 @@ jobs:
         with:
           urls: https://kcedynamics.com/services.html
           uploadArtifacts: true
+          artifactName: lighthouse-results-services
           temporaryPublicStorage: true
           runs: 1
 
@@ -68,6 +72,7 @@ jobs:
         with:
           urls: https://kcedynamics.com/projects.html
           uploadArtifacts: true
+          artifactName: lighthouse-results-projects
           temporaryPublicStorage: true
           runs: 1
 
@@ -76,6 +81,7 @@ jobs:
         with:
           urls: https://kcedynamics.com/contact.html
           uploadArtifacts: true
+          artifactName: lighthouse-results-contact
           temporaryPublicStorage: true
           runs: 1
 
@@ -84,6 +90,7 @@ jobs:
         with:
           urls: https://kcedynamics.com/careers.html
           uploadArtifacts: true
+          artifactName: lighthouse-results-careers
           temporaryPublicStorage: true
           runs: 1
 
