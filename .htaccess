@@ -14,6 +14,12 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.kcedynamics\.com [NC]
 RewriteRule ^(.*)$ https://kcedynamics.com/$1 [L,R=301]
 
+# ── 2b. /index.html → / (canonical home URL) ────
+RewriteRule ^index\.html$ / [R=301,L]
+
+# ── 2c. /favicon.ico → svg favicon ──────────────
+RewriteRule ^favicon\.ico$ /assets/images/favicon.svg [R=302,L]
+
 # ── 3. Security headers ──────────────────────────
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options   "nosniff"
