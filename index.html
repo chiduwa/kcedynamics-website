@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Consent Mode defaults (must run before any tag, incl. GTM) -->
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  (function () {
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem('kce_cookie_consent')); } catch (e) {}
+    var consent = {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    };
+    if (saved && saved.version === 1) {
+      consent.analytics_storage  = saved.analytics ? 'granted' : 'denied';
+      consent.ad_storage         = saved.marketing ? 'granted' : 'denied';
+      consent.ad_user_data       = saved.marketing ? 'granted' : 'denied';
+      consent.ad_personalization = saved.marketing ? 'granted' : 'denied';
+    }
+    gtag('consent', 'default', consent);
+  })();
+  </script>
+  <!-- End Consent Mode defaults -->
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -221,6 +247,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/consent.css" />
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
   <link rel="icon" type="image/png"     href="assets/images/favicon.png" sizes="32x32" />
   <!-- Google tag (gtag.js) -->
@@ -786,6 +813,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="footer__bottom">
       <p class="footer__copy">&copy; 2026 KCE Dynamics Limited. All rights reserved.</p>
       <div class="footer__legal">
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="#" data-cookie-settings>Cookie Settings</a>
         <a href="sitemap.xml">Sitemap</a>
       </div>
     </div>
@@ -793,5 +822,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/consent.js"></script>
 </body>
 </html>

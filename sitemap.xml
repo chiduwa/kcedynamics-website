@@ -62,4 +62,14 @@
     <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/careers.html" />
   </url>
 
+  <!-- Cookie Policy -->
+  <url>
+    <loc>https://kcedynamics.com/cookie-policy.html</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/cookie-policy.html" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/cookie-policy.html" />
+  </url>
+
 </urlset>
