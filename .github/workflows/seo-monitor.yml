@@ -30,6 +30,31 @@ jobs:
             "https://www.bing.com/ping?sitemap=https://kcedynamics.com/sitemap.xml")
           echo "Bing ping → HTTP $STATUS"
 
+      - name: Ping Bing via IndexNow
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://www.bing.com/indexnow?url=https%3A%2F%2Fkcedynamics.com%2Fsitemap.xml&key=83b9cd75f5e79586b3ccce3583dc94aa")
+          echo "Bing IndexNow ping → HTTP $STATUS"
+
+      - name: Submit full site URL list to IndexNow
+        run: |
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "kcedynamics.com",
+              "key": "83b9cd75f5e79586b3ccce3583dc94aa",
+              "keyLocation": "https://kcedynamics.com/83b9cd75f5e79586b3ccce3583dc94aa.txt",
+              "urlList": [
+                "https://kcedynamics.com/",
+                "https://kcedynamics.com/about.html",
+                "https://kcedynamics.com/services.html",
+                "https://kcedynamics.com/projects.html",
+                "https://kcedynamics.com/contact.html",
+                "https://kcedynamics.com/careers.html",
+                "https://kcedynamics.com/cookie-policy.html"
+              ]
+            }' | echo "IndexNow full-site submission complete"
+
   # ── 2. LIGHTHOUSE CI ────────────────────────────────────────────────────────
   # Runs weekly (schedule only) — needs the live site to be up on Hostinger.
   # Download HTML reports from the Actions → Artifacts tab.
@@ -133,3 +158,5 @@ jobs:
             -o /dev/null -w "Google ping → HTTP %{http_code}\n"
           curl -s "https://www.bing.com/ping?sitemap=https://kcedynamics.com/sitemap.xml" \
             -o /dev/null -w "Bing ping → HTTP %{http_code}\n"
+          curl -s "https://www.bing.com/indexnow?url=https%3A%2F%2Fkcedynamics.com%2Fsitemap.xml&key=83b9cd75f5e79586b3ccce3583dc94aa" \
+            -o /dev/null -w "Bing IndexNow ping → HTTP %{http_code}\n"
