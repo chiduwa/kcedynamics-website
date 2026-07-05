@@ -20,6 +20,16 @@ RewriteRule ^index\.html$ / [R=301,L]
 # ── 2c. /favicon.ico → svg favicon ──────────────
 RewriteRule ^favicon\.ico$ /assets/images/favicon.svg [R=302,L]
 
+# ── 2d. Legacy pre-launch placeholder URLs → current pages ──
+# These paths belonged to the Hostinger placeholder site that ran
+# before this site went live and are still known to Google (404 in
+# Search Console). Redirect instead of leaving them dangling so any
+# existing links/index entries carry over to the real page.
+RewriteRule ^maintenance-page/?$ / [R=301,L]
+RewriteRule ^contact-us/?$ /contact.html [R=301,L]
+RewriteRule ^services/?$ /services.html [R=301,L]
+RewriteRule ^projects/?$ /projects.html [R=301,L]
+
 # ── 3. Security headers ──────────────────────────
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options   "nosniff"
