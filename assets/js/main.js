@@ -104,28 +104,33 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.stat__number[data-target]').forEach(el => counterObserver.observe(el));
 
   /* ══════════════════════════════════════════
-     CONTACT FORM (Formspree-ready)
+     CONTACT FORM (submits to Formsubmit.co — see
+     hidden _subject/_next fields on the <form>)
   ══════════════════════════════════════════ */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    contactForm.addEventListener('submit', e => {
-      e.preventDefault();
+    contactForm.addEventListener('submit', () => {
+      // UX only — the native POST + redirect to Formsubmit.co still proceeds.
       const btn = contactForm.querySelector('button[type="submit"]');
-      const orig = btn.textContent;
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
-      // Replace with real Formspree action on the <form> element
-      setTimeout(() => {
-        btn.textContent = '✓ Message Sent';
-        btn.style.background = '#22c55e';
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.style.background = '';
-          btn.disabled = false;
-          contactForm.reset();
-        }, 3000);
-      }, 1200);
+      if (btn) {
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+      }
     });
+  }
+
+  /* Success message — show after Formsubmit redirect with ?sent=1,
+     and fire the conversion event for GTM/GA4 (see trigger
+     "Contact Form Submitted" -> tag "GA4 Event - contact_form_submitted"). */
+  if (window.location.search.includes('sent=1')) {
+    const form    = document.getElementById('contactForm');
+    const success = document.getElementById('contactSuccess');
+    if (form)    form.style.display    = 'none';
+    if (success) success.style.display = 'block';
+    if (success) setTimeout(() => success.scrollIntoView({ behavior: 'smooth', block: 'center' }), 120);
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'contact_form_submitted', form_name: 'contact_enquiry' });
   }
 
   /* ══════════════════════════════════════════
@@ -157,6 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (success) success.style.display = 'block';
     /* Scroll gently to the success panel */
     if (success) setTimeout(() => success.scrollIntoView({ behavior: 'smooth', block: 'center' }), 120);
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'career_application_submitted', form_name: 'careers' });
   }
 
   /* Smooth anchor scroll */

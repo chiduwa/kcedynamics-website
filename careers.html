@@ -502,6 +502,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="hidden" name="_captcha"      value="false" />
           <input type="hidden" name="_next"         value="https://kcedynamics.com/careers.html?applied=1" />
           <input type="hidden" name="_autoresponse" value="Thank you for your application to KCE Dynamics. We have received your CV and will be in touch if there is a suitable fit." />
+          <!-- Honeypot — bots fill hidden fields, humans never see this -->
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
           <div class="contact-form__title">Submit Your Application</div>
 

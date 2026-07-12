@@ -43,10 +43,27 @@ RewriteRule ^projects/?$ /projects.html [R=301,L]
   Header always set X-XSS-Protection         "1; mode=block"
   Header always set Referrer-Policy          "strict-origin-when-cross-origin"
   Header always set Permissions-Policy       "camera=(), microphone=(), geolocation=(self)"
+  # HSTS — site already forces HTTPS (rule #1 above); tell browsers to skip
+  # the plaintext hop entirely on repeat visits. No "preload" yet — that's
+  # a one-way door best left for a deliberate follow-up decision.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
   # Remove server signature
   Header unset X-Powered-By
   Header unset Server
 </IfModule>
+
+# ── 3b. Block access to dotfiles (.git, .env, .DS_Store, etc.) ──
+# Defense in depth — Hostinger's default vhost already blocks most of
+# these, but this makes it explicit and covers macOS .DS_Store litter.
+<FilesMatch "^\.">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
 
 # ── 4. Browser caching (long TTL on versioned assets) ──
 <IfModule mod_expires.c>
