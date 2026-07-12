@@ -357,6 +357,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape' && psPanel.classList.contains('open')) closePanel();
   });
 
+  /* ══════════════════════════════════════════
+     LAZY-LOAD OFFSCREEN VIDEOS
+     Below-the-fold background videos (e.g. the renovation
+     clip on the homepage project grid + projects.html) only
+     start fetching once they're about to scroll into view —
+     keeps them from competing with the hero video for
+     bandwidth on initial page load.
+  ══════════════════════════════════════════ */
+  const lazyVideos = document.querySelectorAll('video.lazy-video');
+  if (lazyVideos.length) {
+    const videoObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const video = entry.target;
+        video.querySelectorAll('source[data-src]').forEach(source => {
+          source.src = source.dataset.src;
+        });
+        video.load();
+        video.play().catch(() => {});
+        observer.unobserve(video);
+      });
+    }, { rootMargin: '200px' });
+    lazyVideos.forEach(video => videoObserver.observe(video));
+  }
+
 });
 
 // ════════════════════════════════════════════════════════

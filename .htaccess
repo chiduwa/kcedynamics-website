@@ -6,11 +6,17 @@
 Options -Indexes
 RewriteEngine On
 
-# ── 1. Force HTTPS ──────────────────────────────
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# ── 0. Force UTF-8 in the HTTP Content-Type header ──
+# Without this, some scrapers (Facebook/Twitter/LinkedIn link
+# unfurlers) fall back to Latin-1 for the raw response, turning
+# UTF-8 punctuation (em dashes, curly quotes) in og:title/description
+# into mojibake even though the page itself declares <meta charset="UTF-8">.
+AddDefaultCharset UTF-8
 
-# ── 2. www → non-www (canonical) ────────────────
+# ── 1. Force HTTPS + www → non-www in ONE redirect ──
+# (was 2 separate hops — http://www... used to bounce through
+# https://www... before landing on the canonical host)
+RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\.kcedynamics\.com [NC]
 RewriteRule ^(.*)$ https://kcedynamics.com/$1 [L,R=301]
 
