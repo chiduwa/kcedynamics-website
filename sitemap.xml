@@ -5,7 +5,7 @@
   <!-- Homepage — highest priority -->
   <url>
     <loc>https://kcedynamics.com/</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/" />
@@ -15,7 +15,7 @@
   <!-- Services — second priority (most search-relevant) -->
   <url>
     <loc>https://kcedynamics.com/services.html</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/services.html" />
@@ -25,7 +25,7 @@
   <!-- About — brand and E-E-A-T signal -->
   <url>
     <loc>https://kcedynamics.com/about.html</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/about.html" />
@@ -35,7 +35,7 @@
   <!-- Projects — portfolio / proof of work -->
   <url>
     <loc>https://kcedynamics.com/projects.html</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/projects.html" />
@@ -45,7 +45,7 @@
   <!-- Contact -->
   <url>
     <loc>https://kcedynamics.com/contact.html</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/contact.html" />
@@ -55,7 +55,7 @@
   <!-- Careers -->
   <url>
     <loc>https://kcedynamics.com/careers.html</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/careers.html" />
@@ -65,7 +65,7 @@
   <!-- Cookie Policy -->
   <url>
     <loc>https://kcedynamics.com/cookie-policy.html</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/cookie-policy.html" />
