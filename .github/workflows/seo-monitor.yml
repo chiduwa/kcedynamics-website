@@ -61,7 +61,9 @@ jobs:
   lighthouse:
     name: Lighthouse performance audit
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'schedule' && github.event.schedule == '0 8 * * 1')
     steps:
       - uses: actions/checkout@v4
 
@@ -125,7 +127,7 @@ jobs:
   refresh-dates:
     name: Update sitemap & dateModified
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'schedule' && github.event.schedule == '0 6 1 * *'
     permissions:
       contents: write
     steps:
