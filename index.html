@@ -38,8 +38,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ═══ SEO ═══ -->
-  <title>KCE Dynamics Limited | Civil &amp; Infrastructure Engineering, Ghana</title>
-  <meta name="description" content="Civil engineering, construction management, drainage, structural and renovation services by KCE Dynamics in Sunyani, Bono Region, Ghana." />
+  <title>KCE Dynamics Limited | Civil Engineering &amp; Construction, Sunyani</title>
+  <meta name="description" content="Civil engineering and construction firm in Sunyani, Bono Region. Residential builds, drainage, retaining structures, site supervision and independent cost estimates — with documented calculations on every project. Get a quote." />
   <meta name="keywords" content="civil engineering Ghana, infrastructure engineering Sunyani, construction company Ghana, drainage systems Ghana, residential buildings Ghana, KCE Dynamics, best construction company Ghana, top civil engineering firm Ghana, project management Ghana, construction project management Ghana, best engineering firm Ghana, project management consultants Ghana, construction management Ghana, building contractor Ghana, construction management West Africa, civil engineer Sunyani, engineering consultant Ghana, top construction firm Bono Region, construction supervision Ghana, quantity surveying Ghana" />
   <link rel="canonical" href="https://kcedynamics.com/" />
   <meta name="robots" content="index, follow" />
@@ -247,6 +247,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" as="image" href="assets/images/hero-poster.jpg" fetchpriority="high" />
   <link rel="stylesheet" href="assets/css/style.min.css" />
   <style>
 /* ===================================================
@@ -450,6 +451,68 @@
     gtag('js', new Date());
     gtag('config', 'G-QSVYSEM7TS');
   </script>
+  <style>
+  /* ── Ground build-up: 3D exploded pavement section ─────────────── */
+  .buildup { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .buildup__label { font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 14px; }
+  .buildup h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; color: var(--charcoal); margin-bottom: 16px; letter-spacing: -.01em; }
+  .buildup p.buildup__lede { color: var(--text-mid); line-height: 1.75; margin-bottom: 26px; font-size: .9375rem; }
+  .buildup__list { list-style: none; display: grid; gap: 14px; margin: 0; padding: 0; }
+  .buildup__list li { display: flex; gap: 14px; align-items: flex-start; font-size: .9rem; line-height: 1.6; }
+  .buildup__list b { flex-shrink: 0; width: 104px; font-weight: 700; color: var(--charcoal); font-size: .8125rem; letter-spacing: .03em; text-transform: uppercase; }
+  .buildup__list span { color: var(--text-mid); }
+
+  .ground3d { perspective: 1150px; perspective-origin: 50% 42%; height: 360px; display: flex; align-items: center; justify-content: center; }
+  .ground3d__stack { position: relative; width: 250px; height: 250px; transform-style: preserve-3d; transform: rotateX(60deg) rotateZ(-40deg); animation: groundDrift 18s ease-in-out infinite; }
+  .ground3d__layer { position: absolute; inset: 0; border: 1.5px solid rgba(28,28,28,.35); border-radius: 3px; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.22,1,.36,1), box-shadow .75s; box-shadow: 0 6px 18px rgba(0,0,0,.10); }
+  .ground3d__layer .cap { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotateZ(40deg) rotateX(-60deg) translateZ(1px); font-size: .6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; color: var(--charcoal); }
+  .ground3d__layer .cap em { display: block; font-style: normal; font-weight: 500; letter-spacing: .04em; text-transform: none; font-size: .625rem; color: var(--text-mid); margin-top: 2px; }
+  .g-subgrade { background: #b9ab93; transform: translateZ(0px); }
+  .g-subbase  { background: #cfc6b4; transform: translateZ(38px); }
+  .g-base     { background: #ded7c9; transform: translateZ(76px); }
+  .g-surface  { background: var(--gold); transform: translateZ(114px); }
+  .g-surface .cap { color: #fff; }
+  .g-surface .cap em { color: rgba(255,255,255,.85); }
+  .ground3d:hover .g-subgrade { transform: translateZ(-30px); }
+  .ground3d:hover .g-subbase  { transform: translateZ(46px); }
+  .ground3d:hover .g-base     { transform: translateZ(122px); }
+  .ground3d:hover .g-surface  { transform: translateZ(198px); }
+  .ground3d:hover .ground3d__layer { box-shadow: 0 16px 34px rgba(0,0,0,.20); }
+  @keyframes groundDrift {
+    0%, 100% { transform: rotateX(60deg) rotateZ(-40deg); }
+    50%      { transform: rotateX(54deg) rotateZ(-28deg); }
+  }
+
+  /* ── Service area ──────────────────────────────────────────────── */
+  .area-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+  .area-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; transition: box-shadow var(--t), transform var(--t), border-color var(--t); }
+  .area-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: var(--gold); }
+  .area-card h3 { font-size: .875rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 8px; }
+  .area-card p { font-size: .875rem; color: var(--text-mid); line-height: 1.65; }
+
+  @media (max-width: 900px) {
+    .buildup { grid-template-columns: 1fr; gap: 34px; }
+    .ground3d { height: 290px; order: -1; }
+    .ground3d__stack { width: 196px; height: 196px; }
+    .g-subbase { transform: translateZ(30px); }
+    .g-base { transform: translateZ(60px); }
+    .g-surface { transform: translateZ(90px); }
+    .area-grid { grid-template-columns: 1fr; }
+    .buildup__list b { width: 92px; }
+  }
+  /* Touch devices never fire :hover, so show the exploded state by default
+     there — otherwise only the top layer's caption is ever readable. */
+  @media (hover: none) {
+    .g-subgrade { transform: translateZ(-24px); }
+    .g-subbase  { transform: translateZ(40px); }
+    .g-base     { transform: translateZ(104px); }
+    .g-surface  { transform: translateZ(168px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ground3d__stack { animation: none; }
+    .ground3d__layer { transition: none; }
+  }
+  </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -564,12 +627,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     Recommended: 1920×1080, H.264, under 8 MB, no audio track.
     Good options: construction site timelapse, aerial site footage,
     foundation pour, or structural steel work.
-    The poster image (og-home.jpg) shows while the video loads.
+    The poster image (hero-poster.jpg) shows while the video loads.
   -->
   <video class="hero__video"
          autoplay muted loop playsinline
-         poster="assets/images/og-home.jpg"
-         preload="metadata"
+         poster="assets/images/hero-poster.jpg"
+         preload="none"
          aria-hidden="true">
     <source src="assets/videos/hero-bg.mp4" type="video/mp4" />
   </video>
@@ -746,6 +809,74 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ═══ GROUND BUILD-UP (3D) ═══ -->
+<section class="section" id="buildup" aria-labelledby="buildup-heading">
+  <div class="container">
+    <div class="buildup">
+      <div>
+        <p class="buildup__label">How we build</p>
+        <h2 id="buildup-heading">Every surface is only as good as what sits under it.</h2>
+        <p class="buildup__lede">
+          Most failures we are called in to assess are not surface failures. They are a layer
+          nobody checked. We specify, test and supervise the full build-up, from the ground
+          it sits on upward, and the record of each layer goes into the handover file.
+        </p>
+        <ul class="buildup__list">
+          <li><b>Surface</b><span>The wearing course the client sees. Laid to level, falls and finish, and signed off against the drawing.</span></li>
+          <li><b>Base</b><span>The load-spreading layer. Graded, compacted, and density-tested before anything covers it.</span></li>
+          <li><b>Sub-base</b><span>Separation and drainage. Gets the water out before it reaches the subgrade and softens it.</span></li>
+          <li><b>Subgrade</b><span>The ground itself. Proof-rolled and, where the readings demand it, improved or replaced rather than built over.</span></li>
+        </ul>
+        <p style="margin-top:24px;font-size:.9375rem;">
+          <a href="services.html" style="color:var(--gold);font-weight:700;">See all engineering services</a>
+          — <a href="services.html#supervision" style="color:var(--gold);font-weight:700;">construction supervision</a>,
+          <a href="services.html#design" style="color:var(--gold);font-weight:700;">design &amp; development</a> and
+          <a href="services.html#analysis" style="color:var(--gold);font-weight:700;">technical analysis</a>.
+        </p>
+      </div>
+      <div class="ground3d">
+        <div class="ground3d__stack" role="img" aria-label="Exploded three-dimensional diagram of a pavement build-up showing, from the bottom upward, the subgrade, sub-base, base and surface layers.">
+          <div class="ground3d__layer g-subgrade"><span class="cap">Subgrade<em>proof-rolled ground</em></span></div>
+          <div class="ground3d__layer g-subbase"><span class="cap">Sub-base<em>drainage &amp; separation</em></span></div>
+          <div class="ground3d__layer g-base"><span class="cap">Base<em>load spreading</em></span></div>
+          <div class="ground3d__layer g-surface"><span class="cap">Surface<em>wearing course</em></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICE AREA ═══ -->
+<section class="section section--concrete" id="service-area" aria-labelledby="area-heading">
+  <div class="container">
+    <p class="buildup__label">Where we work</p>
+    <h2 id="area-heading" style="font-size:clamp(1.5rem,2.6vw,2rem);font-weight:800;color:var(--charcoal);margin-bottom:14px;letter-spacing:-.01em;">A construction and engineering firm based in Sunyani.</h2>
+    <p style="color:var(--text-mid);line-height:1.75;max-width:760px;font-size:.9375rem;">
+      KCE Dynamics Limited works out of Sunyani in the Bono Region, and most of our sites are
+      close enough to reach and inspect the same day. That matters more than it sounds: supervision
+      only works if someone is actually on the ground when the pour happens.
+    </p>
+    <div class="area-grid">
+      <div class="area-card">
+        <h3>Bono Region</h3>
+        <p>Sunyani, Odumasi, Berekum, Dormaa and the surrounding districts. Residential builds, drainage channels and retaining structures, with several kilometres of drainage delivered in the region.</p>
+      </div>
+      <div class="area-card">
+        <h3>Ahafo Region</h3>
+        <p>Kenyasi and the Newmont host communities, including resettlement housing delivered under the Ahafo North and Awonsu programmes.</p>
+      </div>
+      <div class="area-card">
+        <h3>Greater Accra &amp; beyond</h3>
+        <p>Site development, renovation and supervision work in Accra and Tema, including port infrastructure experience at the Port of Tema.</p>
+      </div>
+    </div>
+    <p style="margin-top:26px;font-size:.9375rem;color:var(--text-mid);">
+      Working in one of these areas? <a href="services.html" style="color:var(--gold);font-weight:700;">Review the full service list</a>
+      or <a href="contact.html#estimate" style="color:var(--gold);font-weight:700;">request an estimate</a>.
+    </p>
+  </div>
+</section>
+
 <!-- ═══ ABOUT TEASER ═══ -->
 <section class="section" id="about" aria-labelledby="about-heading">
   <div class="container">
@@ -794,7 +925,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <article class="project-card fade-in">
         <div class="project-card__thumb">
           <!-- Drop your photo here: assets/images/projects/drainage.jpg -->
-          <img src="assets/images/projects/drainage.jpg" alt="Drainage Infrastructure Sunyani Odumasi" class="project-card__img" onerror="this.remove()" />
+          <img src="assets/images/projects/drainage.jpg" alt="Drainage Infrastructure Sunyani Odumasi" class="project-card__img" width="600" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
           <span class="project-card__type-badge">Drainage</span>
         </div>
         <div class="project-card__body">
@@ -810,7 +941,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <article class="project-card fade-in">
         <div class="project-card__thumb">
           <!-- Drop your photo here: assets/images/projects/residential.jpg -->
-          <img src="assets/images/projects/residential.jpg" alt="Residential Building Ahafo Region" class="project-card__img" onerror="this.remove()" />
+          <img src="assets/images/projects/residential.jpg" alt="Residential Building Ahafo Region" class="project-card__img" width="736" height="1069" loading="lazy" decoding="async" onerror="this.remove()" />
           <span class="project-card__type-badge">Residential</span>
         </div>
         <div class="project-card__body">
