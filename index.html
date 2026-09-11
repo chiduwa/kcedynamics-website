@@ -629,13 +629,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     foundation pour, or structural steel work.
     The poster image (hero-poster.jpg) shows while the video loads.
   -->
-  <video class="hero__video"
-         autoplay muted loop playsinline
+  <video class="hero__video" id="hero-video"
+         muted loop playsinline
          poster="assets/images/hero-poster.jpg"
          preload="none"
          aria-hidden="true">
-    <source src="assets/videos/hero-bg.mp4" type="video/mp4" />
+    <source data-src="assets/videos/hero-bg.mp4" type="video/mp4" />
   </video>
+  <script>
+  /* The hero loop is 1.7 MB of decoration sitting on top of the LCP paint.
+     autoplay overrides preload="none", so the only way to keep it off the
+     critical path is to attach the source ourselves once the page has
+     finished loading. Skipped entirely on Save-Data and on 2g/3g, where a
+     decorative background video is not worth the bytes — those visitors
+     keep the poster image, which is what they would have seen anyway while
+     it buffered. */
+  (function () {
+    var v = document.getElementById('hero-video');
+    if (!v) return;
+    var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (c && (c.saveData === true || /(^|-)(2g|3g)$/.test(c.effectiveType || ''))) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function start() {
+      var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 300); };
+      idle(function () {
+        var s = v.querySelector('source[data-src]');
+        if (!s) return;
+        s.src = s.dataset.src;
+        v.load();
+        v.play().catch(function () {});
+      });
+    }
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+  })();
+  </script>
 
   <div class="hero__bg"></div>
   <div class="hero__pattern"></div>
