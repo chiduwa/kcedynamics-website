@@ -1,69 +1,43 @@
 name: SEO & Performance Monitor
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Deploy to Hostinger (FTP)"]
+    types: [completed]
     branches: [main]
   schedule:
-    # Weekly Lighthouse audit — every Monday at 8:00 AM UTC
     - cron: '0 8 * * 1'
-    # Monthly sitemap + dateModified refresh — 1st of every month at 6:00 AM UTC
-    - cron: '0 6 1 * *'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-monitor-${{ github.event_name }}
+  cancel-in-progress: false
+
 jobs:
-  # ── 1. PING SEARCH ENGINES ─────────────────────────────────────────────────
-  # Runs on every push so Google + Bing learn about updates immediately.
-  ping-search-engines:
-    name: Ping Google & Bing with sitemap
+  notify-indexnow:
+    name: Submit deployed canonical pages
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    timeout-minutes: 5
     steps:
-      - name: Ping Google
-        run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "https://www.google.com/ping?sitemap=https://kcedynamics.com/sitemap.xml")
-          echo "Google ping → HTTP $STATUS"
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Validate deployed key and submit sitemap URLs
+        env:
+          SITE_HOST: kcedynamics.com
+          INDEXNOW_KEY: 83b9cd75f5e79586b3ccce3583dc94aa
+        run: python3 .github/scripts/submit-indexnow.py
 
-      - name: Ping Bing
-        run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "https://www.bing.com/ping?sitemap=https://kcedynamics.com/sitemap.xml")
-          echo "Bing ping → HTTP $STATUS"
-
-      - name: Ping Bing via IndexNow
-        run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "https://www.bing.com/indexnow?url=https%3A%2F%2Fkcedynamics.com%2Fsitemap.xml&key=83b9cd75f5e79586b3ccce3583dc94aa")
-          echo "Bing IndexNow ping → HTTP $STATUS"
-
-      - name: Submit full site URL list to IndexNow
-        run: |
-          curl -s -X POST "https://api.indexnow.org/indexnow" \
-            -H "Content-Type: application/json; charset=utf-8" \
-            -d '{
-              "host": "kcedynamics.com",
-              "key": "83b9cd75f5e79586b3ccce3583dc94aa",
-              "keyLocation": "https://kcedynamics.com/83b9cd75f5e79586b3ccce3583dc94aa.txt",
-              "urlList": [
-                "https://kcedynamics.com/",
-                "https://kcedynamics.com/about.html",
-                "https://kcedynamics.com/services.html",
-                "https://kcedynamics.com/projects.html",
-                "https://kcedynamics.com/contact.html",
-                "https://kcedynamics.com/careers.html",
-                "https://kcedynamics.com/cookie-policy.html"
-              ]
-            }' | echo "IndexNow full-site submission complete"
-
-  # ── 2. LIGHTHOUSE CI ────────────────────────────────────────────────────────
-  # Runs weekly (schedule only) — needs the live site to be up on Hostinger.
-  # Download HTML reports from the Actions → Artifacts tab.
   lighthouse:
     name: Lighthouse performance audit
     runs-on: ubuntu-latest
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'schedule' && github.event.schedule == '0 8 * * 1')
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -73,7 +47,6 @@ jobs:
           urls: https://kcedynamics.com/
           uploadArtifacts: true
           artifactName: lighthouse-results-home
-          temporaryPublicStorage: true
           runs: 1
 
       - name: Audit — About
@@ -82,7 +55,6 @@ jobs:
           urls: https://kcedynamics.com/about.html
           uploadArtifacts: true
           artifactName: lighthouse-results-about
-          temporaryPublicStorage: true
           runs: 1
 
       - name: Audit — Services
@@ -91,7 +63,6 @@ jobs:
           urls: https://kcedynamics.com/services.html
           uploadArtifacts: true
           artifactName: lighthouse-results-services
-          temporaryPublicStorage: true
           runs: 1
 
       - name: Audit — Projects
@@ -100,7 +71,6 @@ jobs:
           urls: https://kcedynamics.com/projects.html
           uploadArtifacts: true
           artifactName: lighthouse-results-projects
-          temporaryPublicStorage: true
           runs: 1
 
       - name: Audit — Contact
@@ -109,7 +79,6 @@ jobs:
           urls: https://kcedynamics.com/contact.html
           uploadArtifacts: true
           artifactName: lighthouse-results-contact
-          temporaryPublicStorage: true
           runs: 1
 
       - name: Audit — Careers
@@ -118,47 +87,4 @@ jobs:
           urls: https://kcedynamics.com/careers.html
           uploadArtifacts: true
           artifactName: lighthouse-results-careers
-          temporaryPublicStorage: true
           runs: 1
-
-  # ── 3. REFRESH SITEMAP + dateModified ───────────────────────────────────────
-  # Runs on the 1st of each month. Updates sitemap <lastmod> AND all JSON-LD
-  # dateModified fields, commits back to main, then pings search engines.
-  refresh-dates:
-    name: Update sitemap & dateModified
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' && github.event.schedule == '0 6 1 * *'
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update all dates to today
-        run: |
-          TODAY=$(date +%Y-%m-%d)
-          # Sitemap lastmod
-          sed -i "s|<lastmod>[0-9-]*</lastmod>|<lastmod>$TODAY</lastmod>|g" sitemap.xml
-          # JSON-LD dateModified in every HTML file
-          for f in *.html; do
-            sed -i "s|\"dateModified\": \"[0-9-]*\"|\"dateModified\": \"$TODAY\"|g" "$f"
-          done
-          echo "Updated to $TODAY"
-
-      - name: Commit updated files
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: refresh sitemap lastmod + dateModified"
-          file_pattern: "sitemap.xml *.html"
-          commit_user_name: "SEO Monitor Bot"
-          commit_user_email: "actions@github.com"
-
-      - name: Ping search engines after refresh
-        run: |
-          curl -s "https://www.google.com/ping?sitemap=https://kcedynamics.com/sitemap.xml" \
-            -o /dev/null -w "Google ping → HTTP %{http_code}\n"
-          curl -s "https://www.bing.com/ping?sitemap=https://kcedynamics.com/sitemap.xml" \
-            -o /dev/null -w "Bing ping → HTTP %{http_code}\n"
-          curl -s "https://www.bing.com/indexnow?url=https%3A%2F%2Fkcedynamics.com%2Fsitemap.xml&key=83b9cd75f5e79586b3ccce3583dc94aa" \
-            -o /dev/null -w "Bing IndexNow ping → HTTP %{http_code}\n"

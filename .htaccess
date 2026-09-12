@@ -38,6 +38,7 @@ RewriteRule ^projects/?$ /projects.html [R=301,L]
 
 # ── 3. Security headers ──────────────────────────
 <IfModule mod_headers.c>
+  Header always set Content-Security-Policy "upgrade-insecure-requests; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
   Header always set X-Content-Type-Options   "nosniff"
   Header always set X-Frame-Options          "SAMEORIGIN"
   Header always set X-XSS-Protection         "1; mode=block"
@@ -72,10 +73,10 @@ RewriteRule ^projects/?$ /projects.html [R=301,L]
   # HTML — short cache (content changes occasionally)
   ExpiresByType text/html                    "access plus 4 hours"
 
-  # CSS + JS — long cache (filename-based versioning)
-  ExpiresByType text/css                     "access plus 1 year"
-  ExpiresByType application/javascript       "access plus 1 year"
-  ExpiresByType text/javascript              "access plus 1 year"
+  # Unversioned CSS and JS must refresh after a release.
+  ExpiresByType text/css                     "access plus 1 day"
+  ExpiresByType application/javascript       "access plus 1 day"
+  ExpiresByType text/javascript              "access plus 1 day"
 
   # Images & vector
   ExpiresByType image/jpeg                   "access plus 1 year"
