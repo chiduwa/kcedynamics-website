@@ -516,3 +516,44 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 }());
+
+/* Lead-intent tracking.
+ *
+ * This site has no contact form: every enquiry goes through one of the 24
+ * mailto: links or 17 wa.me links across the pages. Neither fired an event, so
+ * GA4 had nothing to count as a lead — the property's only key event was
+ * `purchase`, which a civil-engineering site will never send. A delegated
+ * listener is used rather than per-link handlers so links added to any page
+ * later are covered without touching this file again.
+ *
+ * The event name is `contact_click`, with `method` distinguishing email from
+ * WhatsApp. Mark it as a key event in GA4 (Admin > Events) for it to count as
+ * a conversion.
+ */
+(function () {
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('a[href]');
+    if (!link) return;
+
+    var href = link.getAttribute('href') || '';
+    var method = null;
+    if (href.indexOf('mailto:') === 0) method = 'email';
+    else if (/^https?:\/\/wa\.me\//i.test(href)) method = 'whatsapp';
+    else if (href.indexOf('tel:') === 0) method = 'phone';
+    if (!method) return;
+
+    // gtag(), not a dataLayer.push: gtag.js is loaded directly on every page
+    // with this property's measurement ID, so this reaches GA4 without any
+    // Tag Manager container work. (ThriveWorks pushes to dataLayer instead,
+    // but its container is configured to forward custom events; this site's
+    // is a different container and is not.)
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'contact_click', {
+        method: method,
+        // Which page the enquiry came from, so the pages that actually
+        // generate work can be told apart from the ones that only get read.
+        link_location: window.location.pathname
+      });
+    }
+  });
+}());
