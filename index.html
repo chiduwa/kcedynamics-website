@@ -40,7 +40,7 @@
   <!-- ═══ SEO ═══ -->
   <title>KCE Dynamics Limited | Civil Engineering &amp; Construction, Sunyani</title>
   <meta name="description" content="Civil engineering and construction firm in Sunyani, Bono Region. Residential builds, drainage, retaining structures, supervision and cost estimates." />
-  <meta name="keywords" content="civil engineering Ghana, infrastructure engineering Sunyani, construction company Ghana, drainage systems Ghana, residential buildings Ghana, KCE Dynamics, best construction company Ghana, top civil engineering firm Ghana, project management Ghana, construction project management Ghana, best engineering firm Ghana, project management consultants Ghana, construction management Ghana, building contractor Ghana, construction management West Africa, civil engineer Sunyani, engineering consultant Ghana, top construction firm Bono Region, construction supervision Ghana, quantity surveying Ghana" />
+  <meta name="keywords" content="civil engineering Ghana, infrastructure engineering Sunyani, construction company Ghana, drainage systems Ghana, residential buildings Ghana, KCE Dynamics, project management Ghana, construction project management Ghana, project management consultants Ghana, construction management Ghana, building contractor Ghana, construction management West Africa, civil engineer Sunyani, engineering consultant Ghana, construction supervision Ghana, quantity surveying Ghana" />
   <link rel="canonical" href="https://kcedynamics.com/" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="KCE Dynamics Limited" />
@@ -481,6 +481,7 @@
     .area-grid { grid-template-columns: 1fr; }
   }
   </style>
+  <link rel="stylesheet" href="assets/css/fx.css?v=20260924" />
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -618,6 +619,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (c && (c.saveData === true || /(^|-)(2g|3g)$/.test(c.effectiveType || ''))) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Phones keep the poster too: most visitors from Ghana browse on mobile
+    // data, and 1.7 MB of background loop is not worth it on a small screen.
+    if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) return;
     function start() {
       var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 300); };
       idle(function () {
@@ -1131,5 +1135,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/consent.js"></script>
+<script src="assets/js/fx.js?v=20260924" defer></script>
 </body>
 </html>
