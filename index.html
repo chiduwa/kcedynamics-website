@@ -8,11 +8,13 @@
   (function () {
     var saved = null;
     try { saved = JSON.parse(localStorage.getItem('kce_cookie_consent')); } catch (e) {}
+    // Analytics is on by default, so visitors in Ghana, the US and elsewhere
+    // are measured; advertising signals stay off everywhere until opted in.
     var consent = {
       ad_storage: 'denied',
       ad_user_data: 'denied',
       ad_personalization: 'denied',
-      analytics_storage: 'denied',
+      analytics_storage: 'granted',
       functionality_storage: 'granted',
       security_storage: 'granted',
       wait_for_update: 500
@@ -22,8 +24,20 @@
       consent.ad_storage         = saved.marketing ? 'granted' : 'denied';
       consent.ad_user_data       = saved.marketing ? 'granted' : 'denied';
       consent.ad_personalization = saved.marketing ? 'granted' : 'denied';
+      gtag('consent', 'default', consent);
+    } else {
+      gtag('consent', 'default', consent);
+      // Where opt-in consent is legally required (EEA, UK, Switzerland)
+      // analytics stays denied until the visitor accepts. Google's tag matches
+      // the visitor's region itself; keep this list in sync with consent.js.
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        region: ['AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR','GR','HR','HU','IE',
+                 'IT','LT','LU','LV','MT','NL','PL','PT','RO','SE','SI','SK',
+                 'IS','LI','NO','GB','CH'],
+        wait_for_update: 500
+      });
     }
-    gtag('consent', 'default', consent);
   })();
   </script>
   <!-- End Consent Mode defaults -->
@@ -40,7 +54,7 @@
   <!-- ═══ SEO ═══ -->
   <title>KCE Dynamics Limited | Civil Engineering &amp; Construction, Sunyani</title>
   <meta name="description" content="Civil engineering and construction firm in Sunyani, Bono Region. Residential builds, drainage, retaining structures, supervision and cost estimates." />
-  <meta name="keywords" content="civil engineering Ghana, infrastructure engineering Sunyani, construction company Ghana, drainage systems Ghana, residential buildings Ghana, KCE Dynamics, project management Ghana, construction project management Ghana, project management consultants Ghana, construction management Ghana, building contractor Ghana, construction management West Africa, civil engineer Sunyani, engineering consultant Ghana, construction supervision Ghana, quantity surveying Ghana" />
+  <meta name="keywords" content="civil engineering Ghana, infrastructure engineering Sunyani, construction company Ghana, drainage systems Ghana, residential buildings Ghana, KCE Dynamics, best construction company Ghana, top civil engineering firm Ghana, project management Ghana, construction project management Ghana, best engineering firm Ghana, project management consultants Ghana, construction management Ghana, building contractor Ghana, construction management West Africa, civil engineer Sunyani, engineering consultant Ghana, top construction firm Bono Region, construction supervision Ghana, quantity surveying Ghana" />
   <link rel="canonical" href="https://kcedynamics.com/" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="KCE Dynamics Limited" />
@@ -136,7 +150,7 @@
         "Construction Project Management Ghana",
         "Construction Management West Africa"
       ],
-      "keywords": "project management Ghana, construction project management Ghana, project management consultants Ghana, construction management Ghana, civil engineer Sunyani, engineering consultant Ghana, civil engineering contractor Ghana, construction supervision Ghana, infrastructure engineering Africa",
+      "keywords": "best construction company Ghana, top civil engineering firm Ghana, project management Ghana, construction project management Ghana, best engineering firm Ghana, project management consultants Ghana, construction management Ghana, civil engineer Sunyani, engineering consultant Ghana, best project management company Ghana, civil engineering contractor Ghana, construction supervision Ghana, infrastructure engineering Africa",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Civil Engineering Services",
@@ -1133,8 +1147,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
-<script src="assets/js/consent.js"></script>
+<script src="assets/js/consent.js?v=20260924"></script>
+<script src="assets/js/main.js?v=20260924"></script>
 <script src="assets/js/fx.js?v=20260924b" defer></script>
 </body>
 </html>

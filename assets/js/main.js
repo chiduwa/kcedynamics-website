@@ -170,7 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Smooth anchor scroll */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
+      // A bare "#" (the Cookie Settings link) is not a valid selector.
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      const t = document.querySelector(href);
       if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
     });
   });

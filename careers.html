@@ -8,11 +8,13 @@
   (function () {
     var saved = null;
     try { saved = JSON.parse(localStorage.getItem('kce_cookie_consent')); } catch (e) {}
+    // Analytics is on by default, so visitors in Ghana, the US and elsewhere
+    // are measured; advertising signals stay off everywhere until opted in.
     var consent = {
       ad_storage: 'denied',
       ad_user_data: 'denied',
       ad_personalization: 'denied',
-      analytics_storage: 'denied',
+      analytics_storage: 'granted',
       functionality_storage: 'granted',
       security_storage: 'granted',
       wait_for_update: 500
@@ -22,8 +24,20 @@
       consent.ad_storage         = saved.marketing ? 'granted' : 'denied';
       consent.ad_user_data       = saved.marketing ? 'granted' : 'denied';
       consent.ad_personalization = saved.marketing ? 'granted' : 'denied';
+      gtag('consent', 'default', consent);
+    } else {
+      gtag('consent', 'default', consent);
+      // Where opt-in consent is legally required (EEA, UK, Switzerland)
+      // analytics stays denied until the visitor accepts. Google's tag matches
+      // the visitor's region itself; keep this list in sync with consent.js.
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        region: ['AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR','GR','HR','HU','IE',
+                 'IT','LT','LU','LV','MT','NL','PL','PT','RO','SE','SI','SK',
+                 'IS','LI','NO','GB','CH'],
+        wait_for_update: 500
+      });
     }
-    gtag('consent', 'default', consent);
   })();
   </script>
   <!-- End Consent Mode defaults -->
@@ -685,13 +699,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="footer__bottom">
       <p class="footer__copy">&copy; 2026 KCE Dynamics Limited. All rights reserved.</p>
       <div class="footer__legal">
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="#" data-cookie-settings>Cookie Settings</a>
         <a href="sitemap.xml">Sitemap</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/consent.js?v=20260924"></script>
+<script src="assets/js/main.js?v=20260924"></script>
 <script src="assets/js/fx.js?v=20260924b" defer></script>
 </body>
 </html>

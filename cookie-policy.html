@@ -8,11 +8,13 @@
   (function () {
     var saved = null;
     try { saved = JSON.parse(localStorage.getItem('kce_cookie_consent')); } catch (e) {}
+    // Analytics is on by default, so visitors in Ghana, the US and elsewhere
+    // are measured; advertising signals stay off everywhere until opted in.
     var consent = {
       ad_storage: 'denied',
       ad_user_data: 'denied',
       ad_personalization: 'denied',
-      analytics_storage: 'denied',
+      analytics_storage: 'granted',
       functionality_storage: 'granted',
       security_storage: 'granted',
       wait_for_update: 500
@@ -22,8 +24,20 @@
       consent.ad_storage         = saved.marketing ? 'granted' : 'denied';
       consent.ad_user_data       = saved.marketing ? 'granted' : 'denied';
       consent.ad_personalization = saved.marketing ? 'granted' : 'denied';
+      gtag('consent', 'default', consent);
+    } else {
+      gtag('consent', 'default', consent);
+      // Where opt-in consent is legally required (EEA, UK, Switzerland)
+      // analytics stays denied until the visitor accepts. Google's tag matches
+      // the visitor's region itself; keep this list in sync with consent.js.
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        region: ['AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR','GR','HR','HU','IE',
+                 'IT','LT','LU','LV','MT','NL','PL','PT','RO','SE','SI','SK',
+                 'IS','LI','NO','GB','CH'],
+        wait_for_update: 500
+      });
     }
-    gtag('consent', 'default', consent);
   })();
   </script>
   <!-- End Consent Mode defaults -->
@@ -67,7 +81,7 @@
       "description": "How KCE Dynamics Limited uses cookies and similar technologies on kcedynamics.com, and how to manage your preferences.",
       "isPartOf": {"@id": "https://kcedynamics.com/#website"},
       "inLanguage": "en-GH",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-24",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -353,7 +367,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="section">
   <div class="container">
     <div class="legal-content">
-      <p class="legal-updated">Last updated: 25 June 2026</p>
+      <p class="legal-updated">Last updated: 24 September 2026</p>
 
       <h2>1. What this policy covers</h2>
       <p>
@@ -373,10 +387,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <h2>3. How we use cookies</h2>
       <p>
-        When you first visit kcedynamics.com, a consent banner asks you to choose which categories
-        of cookies you allow. Nothing outside the "Necessary" category runs until you say yes —
-        this is enforced through Google's Consent Mode, which keeps analytics and advertising tags
-        in a denied state until you grant permission.
+        How cookies work on kcedynamics.com depends on where you are visiting from. In the
+        EU/EEA, the UK and Switzerland, a consent banner asks you to choose which categories of
+        cookies you allow, and nothing outside the "Necessary" category runs until you say yes.
+        Everywhere else, including Ghana and the United States, analytics cookies are on by
+        default and no banner is shown; you can switch them off at any time from the Cookie
+        Settings link. Marketing cookies stay off for everyone unless you opt in. This is enforced
+        through Google's Consent Mode. To decide which rule applies we look up only your country,
+        through our Cloudflare network.
       </p>
 
       <h3>Necessary</h3>
@@ -388,7 +406,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <h3>Analytics</h3>
       <p>
-        If you opt in, we use Google Analytics (via Google Tag Manager) to understand how visitors
+        Where analytics is on (see above), we use Google Analytics (via Google Tag Manager) to understand how visitors
         use the site — pages viewed, time on page, and general traffic sources. This sets cookies
         such as:
       </p>
@@ -416,10 +434,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <h2>5. Legal basis</h2>
       <p>
-        For visitors in the EU/EEA and UK, non-essential cookies (analytics and marketing) are only
-        set with your consent, in line with the ePrivacy Directive and Article 6(1)(a) GDPR. You
-        can withdraw consent at any time with no effect on the lawfulness of processing carried out
-        before withdrawal.
+        For visitors in the EU/EEA, the UK and Switzerland, non-essential cookies (analytics and
+        marketing) are only set with your consent, in line with the ePrivacy Directive and Article
+        6(1)(a) GDPR. You can withdraw consent at any time with no effect on the lawfulness of
+        processing carried out before withdrawal. Visitors elsewhere can switch analytics off at
+        any time from Cookie Settings, and marketing cookies are only ever set with consent.
       </p>
 
       <h2>6. Your rights</h2>
@@ -538,13 +557,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="footer__bottom">
       <p class="footer__copy">&copy; 2026 KCE Dynamics Limited. All rights reserved.</p>
       <div class="footer__legal">
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="#" data-cookie-settings>Cookie Settings</a>
         <a href="sitemap.xml">Sitemap</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/consent.js?v=20260924"></script>
+<script src="assets/js/main.js?v=20260924"></script>
 <script src="assets/js/fx.js?v=20260924b" defer></script>
 </body>
 </html>

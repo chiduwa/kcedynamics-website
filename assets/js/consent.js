@@ -98,6 +98,24 @@
     return wrap;
   };
 
+  // EEA, Iceland, Liechtenstein, Norway, UK and Switzerland: the places with a
+  // GDPR-style opt-in rule. Mirrors the region list in each page's <head>.
+  const CONSENT_REQUIRED = new Set(['AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR','GR','HR','HU','IE',
+    'IT','LT','LU','LV','MT','NL','PL','PT','RO','SE','SI','SK','IS','LI','NO','GB','CH']);
+
+  // Cloudflare serves /cdn-cgi/trace from our own origin, so the visitor's
+  // country costs one same-origin request and no third-party geo service.
+  // If the lookup is slow or fails, the banner is shown (fail safe).
+  const resolveCountry = cb => {
+    let done = false;
+    const finish = c => { if (!done) { done = true; cb(c); } };
+    const timer = setTimeout(() => finish(''), 1500);
+    fetch('/cdn-cgi/trace', { cache: 'no-store' })
+      .then(r => (r.ok ? r.text() : ''))
+      .then(t => { clearTimeout(timer); const m = /(^|\n)loc=([A-Z]{2})/.exec(t || ''); finish(m ? m[2] : ''); })
+      .catch(() => { clearTimeout(timer); finish(''); });
+  };
+
   const init = () => {
     const banner = buildBanner();
     document.body.appendChild(banner);
@@ -126,18 +144,32 @@
       if (action === 'save')      applyAndClose(!!chkA.checked, !!chkM.checked);
     });
 
+    // Analytics default for someone who has not chosen yet: on outside the
+    // opt-in regions, off inside them (and off until the country is known).
+    let analyticsDefault = false;
+
     const existing = getSavedConsent();
     if (existing) {
       chkA.checked = !!existing.analytics;
       chkM.checked = !!existing.marketing;
     } else {
-      showBar();
+      // Only visitors where opt-in consent is legally required see the banner.
+      // Everyone else is measured under the analytics default set in <head>.
+      resolveCountry(country => {
+        if (country && !CONSENT_REQUIRED.has(country)) {
+          analyticsDefault = true;
+          chkA.checked = true;
+          if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'granted' });
+        } else {
+          showBar();
+        }
+      });
     }
 
     document.querySelectorAll('[data-cookie-settings]').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
-        const current = getSavedConsent() || { analytics: false, marketing: false };
+        const current = getSavedConsent() || { analytics: analyticsDefault, marketing: false };
         chkA.checked = !!current.analytics;
         chkM.checked = !!current.marketing;
         showPanel();
