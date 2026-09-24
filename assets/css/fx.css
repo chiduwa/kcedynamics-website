@@ -19,7 +19,7 @@
   background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.02) 55%, rgba(255, 255, 255, 0.10));
   -webkit-backdrop-filter: blur(var(--fx-glass-blur)) saturate(170%);
   backdrop-filter: blur(var(--fx-glass-blur)) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, var(--fx-glass-edge));
+  border-color: rgba(255, 255, 255, var(--fx-glass-edge));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.55),
     inset 0 -10px 20px -14px rgba(255, 255, 255, 0.35),
@@ -100,5 +100,5 @@
   border-radius: 10px;
 }
 .service-card, .project-card, .area-card { border-radius: 10px; }
-/* The seven quick links fit on one row on a laptop instead of orphaning the last. */
-.quick-links__grid { gap: clamp(20px, 3.2vw, 44px); }
+/* The quick-links gap now lives in style.min.css: fx.css loads after first
+   paint, and a late gap change would shift the row. */
