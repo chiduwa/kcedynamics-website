@@ -162,7 +162,7 @@
     try { input = readInputs(); } catch (err) { setStatus(err.message, true); return; }
     var btn = $('#rc-go');
     btn.disabled = true;
-    setStatus('Loading the solver (about 1.3 MB, once)...');
+    setStatus('Loading the solver (about 1.2 MB, downloaded once)...');
     loadSolver().then(function (highs) {
       setStatus('Working out the plan...');
       return new Promise(function (r) { setTimeout(r, 30); }).then(function () { return solveAll(highs, input); });
