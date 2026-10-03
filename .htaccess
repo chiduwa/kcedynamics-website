@@ -66,6 +66,11 @@ RewriteRule ^projects/?$ /projects.html [R=301,L]
   </IfModule>
 </FilesMatch>
 
+# ── 3b. WebAssembly MIME type ────────────────────
+# Browsers compile .wasm while it downloads only when it is served as
+# application/wasm; nosniff (above) means a wrong type is never guessed.
+AddType application/wasm .wasm
+
 # ── 4. Browser caching (long TTL on versioned assets) ──
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -96,6 +101,9 @@ RewriteRule ^projects/?$ /projects.html [R=301,L]
   ExpiresByType video/mp4                    "access plus 6 months"
   ExpiresByType video/webm                   "access plus 6 months"
 
+  # WebAssembly (the cutting tool's solver; the URL carries its version)
+  ExpiresByType application/wasm             "access plus 1 year"
+
   # Data
   ExpiresByType application/json             "access plus 0 seconds"
   ExpiresByType application/ld+json          "access plus 0 seconds"
@@ -112,6 +120,7 @@ RewriteRule ^projects/?$ /projects.html [R=301,L]
   AddOutputFilterByType DEFLATE image/svg+xml
   AddOutputFilterByType DEFLATE text/xml
   AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/wasm
 </IfModule>
 
 # ── 6. Custom error pages ────────────────────────

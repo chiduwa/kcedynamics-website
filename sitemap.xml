@@ -72,4 +72,14 @@
     <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/cookie-policy.html" />
   </url>
 
+  <!-- Rebar Cutting Optimiser -->
+  <url>
+    <loc>https://kcedynamics.com/rebar-cutting.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/rebar-cutting.html" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://kcedynamics.com/rebar-cutting.html" />
+  </url>
+
 </urlset>

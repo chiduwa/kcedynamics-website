@@ -1,0 +1,101 @@
+/* Rebar cutting optimiser page. Uses the site's tokens from style.css. */
+.rc-wrap { max-width: 1080px; margin: 0 auto; }
+.rc-intro { max-width: 760px; color: var(--text-mid); font-size: 1.02rem; line-height: 1.7; margin-bottom: 2rem; }
+.rc-intro p + p { margin-top: .8rem; }
+
+.rc-panel { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); padding: 1.5rem; margin-bottom: 1.5rem; }
+.rc-panel h2 { font-size: 1.15rem; margin: 0 0 .35rem; color: var(--text-dark); }
+.rc-panel > p { color: var(--text-mid); font-size: .92rem; margin: 0 0 1rem; }
+
+.rc-settings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.rc-field label { display: block; font-size: .82rem; font-weight: 600; color: var(--text-mid); margin-bottom: .35rem; }
+.rc-field small { display: block; color: var(--text-light); font-size: .76rem; margin-top: .3rem; }
+
+.rc-form select, .rc-form input[type=number], .rc-form input[type=text] {
+  width: 100%; min-width: 0; font: inherit; font-size: .95rem; padding: .55rem .6rem;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--white); color: var(--text-dark); }
+.rc-form select:focus, .rc-form input:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
+
+/* position: relative keeps absolutely positioned children (the hidden column
+   labels) inside the scroll box; without it they widen the whole page. */
+.rc-tablewrap { position: relative; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.rc-rows { width: 100%; border-collapse: collapse; min-width: 560px; }
+.rc-rows th { text-align: left; font-size: .76rem; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-light); font-weight: 600; padding: 0 .4rem .4rem; }
+.rc-rows td { padding: .3rem .4rem; vertical-align: middle; }
+.rc-rows td:first-child { width: 96px; }
+.rc-rows td.rc-c { text-align: center; width: 70px; }
+.rc-rows td:last-child { width: 44px; }
+.rc-x { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--off-white);
+  color: var(--text-mid); font-size: 1.2rem; line-height: 1; cursor: pointer; }
+.rc-x:hover { border-color: var(--terracotta); color: var(--terracotta); }
+.rc-add { margin-top: .6rem; background: none; border: 1px dashed var(--concrete-dark); border-radius: var(--radius);
+  padding: .45rem .9rem; font: inherit; font-size: .88rem; color: var(--text-mid); cursor: pointer; }
+.rc-add:hover { border-color: var(--gold); color: var(--text-dark); }
+
+.rc-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin: 1.5rem 0 .5rem; }
+.rc-actions .btn { cursor: pointer; }
+.rc-actions .btn[disabled] { opacity: .6; cursor: progress; }
+.rc-link { background: none; border: none; padding: .4rem 0; font: inherit; font-size: .92rem; color: var(--teal);
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.rc-status { min-height: 1.5em; font-size: .92rem; color: var(--text-mid); margin: .5rem 0 0; }
+.rc-status--error { color: var(--terracotta); font-weight: 600; }
+
+.rc-results { margin-top: 2.5rem; scroll-margin-top: 100px; }
+.rc-results__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+.rc-results__bar h2 { margin: 0; font-size: 1.4rem; }
+.rc-total, .rc-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; }
+.rc-total { background: var(--charcoal); color: var(--white); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.25rem; }
+.rc-total b, .rc-stats b { display: block; font-size: 1.6rem; font-weight: 800; line-height: 1.15; }
+.rc-total b { color: var(--gold-light); }
+.rc-total span, .rc-stats span { display: block; font-size: .8rem; opacity: .85; margin-top: .2rem; }
+.rc-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+.rc-card__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .75rem; }
+.rc-card__head h3 { margin: 0; font-size: 1.15rem; }
+.rc-card__head span { color: var(--text-light); font-size: .82rem; }
+.rc-stats b { color: var(--text-dark); font-size: 1.35rem; }
+.rc-stats span { color: var(--text-mid); opacity: 1; }
+.rc-proof { margin: .9rem 0 .4rem; font-size: .88rem; color: var(--teal); }
+.rc-note { margin: .2rem 0 .6rem; font-size: .84rem; color: var(--text-mid); }
+.rc-plan { width: 100%; border-collapse: collapse; margin-top: .6rem; font-size: .9rem; min-width: 420px; }
+.rc-plan th { text-align: left; background: var(--off-white); font-size: .76rem; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--text-mid); padding: .5rem .6rem; }
+.rc-plan td { padding: .5rem .6rem; border-top: 1px solid var(--off-white); }
+.rc-plan td:first-child { font-weight: 700; width: 70px; }
+.rc-plan td:last-child { width: 100px; }
+
+.rc-how { max-width: 760px; color: var(--text-mid); line-height: 1.7; }
+.rc-how h2 { color: var(--text-dark); font-size: 1.3rem; margin: 0 0 .6rem; }
+.rc-how h3 { color: var(--text-dark); font-size: 1.02rem; margin: 1.4rem 0 .3rem; }
+.rc-how p + p { margin-top: .8rem; }
+.rc-how ul { padding-left: 1.2rem; list-style: disc; }
+.rc-how li { margin: .3rem 0; }
+
+@media (max-width: 760px) {
+  .rc-settings { grid-template-columns: 1fr; }
+  .rc-panel { padding: 1.1rem; }
+}
+/* Phones: drop the optional Note column so the input rows fit without sideways scrolling. */
+@media (max-width: 600px) {
+  .rc-rows { min-width: 0; }
+  #rc-pieces th:nth-child(4), #rc-pieces td:nth-child(4),
+  #rc-runs th:nth-child(5), #rc-runs td:nth-child(5) { display: none; }
+  .rc-rows td:first-child { width: 78px; }
+  .rc-rows td { padding: .25rem .2rem; }
+  .rc-rows th { padding: 0 .2rem .4rem; font-size: .7rem; }
+  .rc-plan { min-width: 0; }
+  .rc-plan td:last-child { width: 72px; }
+}
+
+@media print {
+  .topbar, .site-header, .site-footer, .cta-banner, .page-hero, .rc-form, .rc-results__bar button, .rc-how, .cookie-consent { display: none !important; }
+  .rc-results { margin: 0; }
+  .rc-card { break-inside: avoid; box-shadow: none; }
+  .rc-total { background: none; color: #000; border: 1px solid #000; }
+  .rc-total b { color: #000; }
+}
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.rc-panel h2 small { font-weight: 500; color: var(--text-light); font-size: .82rem; }

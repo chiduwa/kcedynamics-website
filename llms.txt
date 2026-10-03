@@ -21,6 +21,7 @@ Founded in 2020 by Kwame Owusu-Ansah (Founder & Principal Engineer). Operates pr
 - [Projects](https://kcedynamics.com/projects.html): completed work, including drainage infrastructure in Sunyani Odumasi and a residential building in the Ahafo Region.
 - [Careers](https://kcedynamics.com/careers.html): open roles and how to apply.
 - [Contact](https://kcedynamics.com/contact.html): project enquiry form and direct contact details.
+- [Rebar Cutting Optimiser](https://kcedynamics.com/rebar-cutting.html): free in-browser tool that turns a bar schedule into the fewest 12 m stock bars and a cutting plan for each bar, with the bar count proven to be the minimum.
 
 ## Contact
 
