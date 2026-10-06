@@ -1,0 +1,189 @@
+/* KCE Dynamics — concrete, mill steel and weathered metal finishes.
+   Loaded after the base and effects styles. Solid colors are asset fallbacks.
+   Keep text surfaces quiet; use full material detail on open section space. */
+:root {
+  --charcoal: #242726;
+  --charcoal-mid: #343836;
+  --charcoal-deep: #171918;
+  --gold: #b39960;
+  --gold-light: #d0b982;
+  --gold-pale: #ece7da;
+  --teal: #3c605c;
+  --teal-light: #304f4b;
+  --terracotta: #824a35;
+  --concrete: #d8d7d2;
+  --concrete-dark: #b8bab4;
+  --off-white: #f5f4f0;
+  --text-dark: #242726;
+  --text-mid: #4e524f;
+  --text-light: #656963;
+  --border: #c6c7c0;
+  --brass-ink: #705a2e;
+  --concrete-texture: url('../images/textures/cast-concrete-v1.webp');
+  --steel-texture: url('../images/textures/weathered-steel-v1.webp');
+}
+
+.section--concrete {
+  background-color: var(--concrete);
+  background-image: linear-gradient(rgba(242,242,238,.48), rgba(236,237,232,.48)), var(--concrete-texture);
+  background-size: auto, max(100%, 1400px) auto;
+  background-position: center top;
+}
+
+.section--dark,
+.section--charcoal,
+.section--navy,
+.page-hero,
+.cta-banner,
+.about-teaser__box,
+.about-teaser__box.fx-glass {
+  background-color: var(--charcoal);
+  background-image: linear-gradient(110deg, rgba(20,24,22,.68), rgba(27,31,29,.48)), var(--steel-texture);
+  background-size: auto, max(100%, 1400px) auto;
+  background-position: center;
+  color: var(--white);
+}
+
+.site-header,
+.site-header.fx-header-glass {
+  background-color: var(--charcoal) !important;
+  background-image: linear-gradient(rgba(18,22,20,.75), rgba(18,22,20,.75)), var(--steel-texture);
+  background-size: auto, max(100%, 1200px) auto;
+  border-bottom-color: var(--gold);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.about-teaser__box.fx-glass {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-color: rgba(179,153,96,.4);
+}
+.about-teaser__box.fx-glass::after { display: none; }
+.page-hero__pattern,
+.cta-banner::before { background-image: none; }
+
+/* A darker cast-concrete footer echoes the large material field above. */
+.site-footer {
+  background-color: #484c47;
+  background-image: linear-gradient(rgba(28,33,29,.72), rgba(25,29,26,.80)), var(--concrete-texture);
+  background-size: auto, max(100%, 1400px) auto;
+  background-position: center top;
+  color: #eeeee9;
+}
+.footer__links a,
+.footer__legal a,
+.footer__social a { color: #e1e3dc; }
+.footer__bottom { border-top-color: rgba(235,236,227,.24); }
+.footer__col-title,
+.footer__contact-item svg { color: #e0c990; }
+.footer__social a:hover { color: var(--white); border-color: var(--gold-light); }
+
+/* Brass utility medallions: real pores beneath a warm metal finish. */
+.quick-link-icon {
+  background-color: var(--gold);
+  background-image: linear-gradient(135deg, rgba(218,189,116,.72), rgba(153,120,53,.72)), var(--concrete-texture);
+  background-size: auto, 320px auto;
+  border: 1px solid #a08b59;
+  box-shadow: inset 0 1px 1px rgba(255,244,202,.8), inset 0 -2px 3px rgba(76,61,27,.3), 2px 4px 5px rgba(30,32,27,.28);
+}
+.quick-link-icon svg { color: #292b25; }
+.quick-link-item:hover .quick-link-icon {
+  background-color: var(--gold-light);
+  background-image: linear-gradient(135deg, rgba(231,207,146,.72), rgba(171,139,69,.72)), var(--concrete-texture);
+  box-shadow: inset 0 1px 1px rgba(255,244,202,.8), 3px 7px 9px rgba(30,32,27,.27);
+}
+.quick-link-item:hover .quick-link-label { color: var(--brass-ink); }
+
+/* Oxidized iron for services; patinated green for process and actions. */
+.service-card__circle,
+.service-detail__icon {
+  background-color: var(--terracotta);
+  background-image: linear-gradient(135deg, rgba(135,75,48,.85), rgba(104,56,36,.9)), var(--concrete-texture);
+  background-size: auto, 250px auto;
+  border: 1px solid #784b35;
+  box-shadow: inset 0 1px 1px rgba(250,213,177,.45), 2px 3px 5px rgba(49,36,24,.24);
+}
+.service-card:hover .service-card__circle { box-shadow: inset 0 1px 1px rgba(250,213,177,.45), 2px 5px 8px rgba(49,36,24,.28); }
+.step__number {
+  background-color: var(--teal);
+  background-image: linear-gradient(rgba(46,81,75,.88), rgba(46,81,75,.88)), var(--concrete-texture);
+  background-size: auto, 240px auto;
+  box-shadow: inset 0 1px 1px rgba(207,227,214,.4), 2px 3px 6px rgba(0,0,0,.3);
+}
+.btn--primary {
+  background-color: var(--teal);
+  background-image: linear-gradient(rgba(49,86,79,.86), rgba(40,73,67,.92)), var(--steel-texture);
+  background-size: auto, 450px auto;
+  border-color: #56746b;
+  box-shadow: inset 0 1px 0 rgba(213,229,215,.18), 0 2px 3px rgba(22,32,26,.15);
+}
+.btn--primary:hover {
+  background-color: var(--teal-light);
+  background-image: linear-gradient(rgba(35,66,59,.9), rgba(32,58,53,.94)), var(--steel-texture);
+  border-color: #719083;
+}
+
+.service-card,
+.project-card,
+.value-card,
+.team-card,
+.area-card {
+  background-color: #f6f5f1;
+  border-color: #c3c5bd;
+  box-shadow: 0 1px 1px rgba(255,255,255,.7) inset, 0 3px 10px rgba(41,44,35,.07);
+}
+.contact-form {
+  background-color: var(--concrete);
+  background-image: linear-gradient(rgba(238,239,232,.82), rgba(238,239,232,.82)), var(--concrete-texture);
+  background-size: auto, max(100%, 1200px) auto;
+}
+
+/* Brass text requires a darker tone than brass used as a solid accent. */
+.service-card__link,
+.project-card__link,
+.project-card__tag,
+.team-card__role,
+.ps-result h4,
+.bw-stage-label,
+.cv-upload__main.file-selected,
+.faq-question:hover { color: var(--brass-ink); }
+.project-card__type-badge { color: var(--charcoal-deep); }
+.section--dark .section__label,
+.section--charcoal .section__label,
+.section--navy .section__label { color: #d3ad87; }
+.section--dark .section__subtitle,
+.section--charcoal .section__subtitle,
+.section--navy .section__subtitle,
+.page-hero__sub,
+.cta-banner__sub,
+.step__desc { color: #d4d8d0; }
+.page-hero__breadcrumb,
+.page-hero__breadcrumb span { color: #bfc8bf; }
+.page-hero__breadcrumb a { color: #b2d0be; }
+
+@media (max-width: 768px) {
+  .section--concrete,
+  .site-footer { background-size: auto, 1000px auto; }
+}
+
+/* Keep the existing content within its material panels at narrow widths. */
+.form-group .cv-upload__input { width: 1px; height: 1px; padding: 0; border: 0; clip-path: inset(50%); }
+.form-group:focus-within .cv-upload { border-color: var(--teal); }
+.estimate-panel { padding: 36px 40px; }
+.estimate-features { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.services-grid,
+.team-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.projects-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.service-detail > *,
+.contact-grid > * { min-width: 0; }
+@media (max-width: 480px) {
+  .btn { max-width: 100%; white-space: normal; text-align: center; justify-content: center; }
+  .nav { gap: 16px; }
+  .nav__logo { min-width: 0; flex-shrink: 1; }
+  .nav__logo-img { max-width: 100%; height: auto; max-height: 52px; }
+  .contact-form { padding: 28px 20px; }
+  .estimate-panel { padding: 28px 20px; }
+  .estimate-features { grid-template-columns: 1fr; }
+  .estimate-panel a { overflow-wrap: anywhere; }
+}
