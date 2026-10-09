@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
       Start a Project
     </button>
 
-    <div class="ps-panel" id="psPanel" aria-hidden="true">
+    <div class="ps-panel" id="psPanel" aria-hidden="true" inert>
       <div class="ps-panel-header">
         <h4>KCE Project Starter</h4>
         <button class="ps-close-btn" id="psClose" aria-label="Close">×</button>
@@ -348,12 +348,15 @@ document.addEventListener('DOMContentLoaded', () => {
     psPanel.classList.add('open');
     psTrigger.setAttribute('aria-expanded', 'true');
     psPanel.setAttribute('aria-hidden', 'false');
+    psPanel.removeAttribute('inert');
     if (psStep === 0 && !psAnswers[0]) renderStep(0);
   }
   function closePanel() {
     psPanel.classList.remove('open');
     psTrigger.setAttribute('aria-expanded', 'false');
     psPanel.setAttribute('aria-hidden', 'true');
+    // A closed panel is only transparent; inert keeps its controls out of the tab order.
+    psPanel.setAttribute('inert', '');
   }
 
   psTrigger.addEventListener('click', () => {
@@ -436,11 +439,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var bwHTML = '<div id="bwWidget" class="bw-widget" role="complementary" aria-label="Build-a-House">' +
     '<span class="bw-tooltip">Build it!</span>' +
-    '<button class="bw-trigger" id="bwTrigger" aria-label="Build-a-House widget" aria-expanded="false">' +
+    '<button class="bw-trigger" id="bwTrigger" aria-expanded="false">' +
+      '<span class="sr-only">Build-a-House widget</span>' +
       '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' +
-      '<span class="bw-badge" id="bwBadge">1</span>' +
+      '<span class="bw-badge" id="bwBadge" aria-hidden="true">1</span>' +
     '</button>' +
-    '<div class="bw-panel" id="bwPanel" aria-hidden="true">' +
+    '<div class="bw-panel" id="bwPanel" aria-hidden="true" inert>' +
       '<div class="bw-panel-header">' +
         '<span>Build&#8209;a&#8209;House</span>' +
         '<button class="bw-close" id="bwClose" aria-label="Close">&times;</button>' +
@@ -498,12 +502,14 @@ document.addEventListener('DOMContentLoaded', () => {
     bwPanel.classList.add('open');
     bwTrigger.setAttribute('aria-expanded', 'true');
     bwPanel.setAttribute('aria-hidden', 'false');
+    bwPanel.removeAttribute('inert');
     renderBwStage();
   }
   function closeBwPanel() {
     bwPanel.classList.remove('open');
     bwTrigger.setAttribute('aria-expanded', 'false');
     bwPanel.setAttribute('aria-hidden', 'true');
+    bwPanel.setAttribute('inert', '');
   }
 
   bwTrigger.addEventListener('click', function () {

@@ -151,7 +151,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
-  <link rel="stylesheet" href="assets/css/style.min.css?v=20261008" />
+  <link rel="preload" as="image" href="assets/images/textures/weathered-steel-v1-sm.webp" media="(max-width: 768px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/images/textures/weathered-steel-v1.webp" media="(min-width: 769px)" fetchpriority="high" />
+  <link rel="stylesheet" href="assets/css/style.min.css?v=20261008b" />
   <style>
 /* ===================================================
    KCE Dynamics Limited — Cookie Consent Banner
@@ -355,13 +357,14 @@
     gtag('config', 'G-QSVYSEM7TS');
   </script>
   <link rel="stylesheet" href="assets/css/fx.css?v=20260924b" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="assets/css/fx.css?v=20260924b" /></noscript>
-  <link rel="stylesheet" href="assets/css/materials.css?v=20261008a" />
+  <link rel="stylesheet" href="assets/css/materials.css?v=20261008b" />
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJ47BQFK"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<a class="skip-link" href="#main">Skip to content</a>
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -383,7 +386,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site-header">
   <div class="container">
     <nav class="nav" aria-label="Main navigation">
-      <a href="/" class="nav__logo" aria-label="KCE Dynamics Home">
+      <a href="/" class="nav__logo" aria-label="KCE Dynamics Limited home">
         <img src="assets/images/logo.svg" alt="KCE Dynamics Limited" class="nav__logo-img" width="180" height="52"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
         <span class="nav__logo-svg" style="display:none;">
@@ -421,6 +424,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
   </div>
 </header>
+<main id="main">
 
 <!-- PAGE HERO -->
 <section class="page-hero">
@@ -647,6 +651,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- FOOTER -->
+</main>
+
 <footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer__grid">
@@ -744,7 +750,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="assets/js/consent.js?v=20260924"></script>
-<script src="assets/js/main.js?v=20261008"></script>
+<script src="assets/js/main.js?v=20261008b"></script>
 <script src="assets/js/fx.js?v=20260924b" defer></script>
 </body>
 </html>

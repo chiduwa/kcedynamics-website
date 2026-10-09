@@ -190,3 +190,12 @@
   .estimate-features { grid-template-columns: 1fr; }
   .estimate-panel a { overflow-wrap: anywhere; }
 }
+
+/* Phones get 800px textures: the 1200px files were the largest paint on
+   every interior page (168 KB, found only after this stylesheet loaded). */
+@media (max-width: 768px) {
+  :root {
+    --concrete-texture: url('../images/textures/cast-concrete-v1-sm.webp');
+    --steel-texture: url('../images/textures/weathered-steel-v1-sm.webp');
+  }
+}
