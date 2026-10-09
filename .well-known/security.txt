@@ -1,0 +1,6 @@
+# Security contact for kcedynamics.com (RFC 9116).
+# Please report vulnerabilities privately to the address below.
+Contact: mailto:kwame@kcedynamics.com
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://kcedynamics.com/.well-known/security.txt
