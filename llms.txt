@@ -4,6 +4,21 @@
 
 Founded in 2020 by Kwame Owusu-Ansah (Founder & Principal Engineer). Operates primarily across the Bono and Ahafo regions of Ghana, and takes on projects elsewhere in the country.
 
+## Vision, motto and values
+
+Set out in the company constitution and published at https://kcedynamics.com/about.html#vision
+
+- **Vision**: To deliver technical expertise and construction services that return the highest value on every cedi invested, and leave work the next generation can build on.
+- **Motto**: Innovation for a Sustainable Future.
+- **Tagline**: Today's Work, Tomorrow's Heritage.
+- **Values**:
+  - Lasting value: designs and prices are set for the whole life of a structure.
+  - Practical innovation: a new method is adopted when it cuts cost, waste or risk, for example the free rebar cutting optimiser.
+  - Sustainable building: less waste on site, foundations and drainage matched to local soils and rainfall, fewer repairs over a structure's life.
+  - Evidence before price: every engagement starts with site readings and a data review, and scope is confirmed before cost.
+  - Accountable on site: each stage is inspected before the next one covers it.
+  - Open books: clients can review their project's calculations, site diaries and material records at any stage; the company keeps transparent accounts, an annual financial report and a reserve fund for emergencies.
+
 ## Services
 
 - **Design & Development**: structural design for residential buildings, drainage infrastructure, and retaining structures, backed by documented engineering calculations specific to site and load conditions. Includes site investigation and feasibility reports.
@@ -16,7 +31,7 @@ Founded in 2020 by Kwame Owusu-Ansah (Founder & Principal Engineer). Operates pr
 ## Key pages
 
 - [Home](https://kcedynamics.com/): overview of the firm, services, and process.
-- [About](https://kcedynamics.com/about.html): company background, founder profile, values, and operating philosophy.
+- [About](https://kcedynamics.com/about.html): company background, vision, motto and values, founder profile, and operating philosophy.
 - [Services](https://kcedynamics.com/services.html): full detail on all six service lines above.
 - [Projects](https://kcedynamics.com/projects.html): completed work, including drainage infrastructure in Sunyani Odumasi and a residential building in the Ahafo Region.
 - [Careers](https://kcedynamics.com/careers.html): open roles and how to apply.

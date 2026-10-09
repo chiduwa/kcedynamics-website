@@ -13,8 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu   = document.querySelector('.nav__menu');
 
   if (hamburger && navMenu) {
+    const siteHeader = document.querySelector('.site-header');
     hamburger.addEventListener('click', () => {
       const isOpen = navMenu.classList.toggle('mobile-open');
+      // Open below the header's real bottom edge: on tablets the top bar is
+      // still visible above the sticky header, so a fixed 76px would cover it.
+      navMenu.style.top = isOpen && siteHeader ? Math.round(siteHeader.getBoundingClientRect().bottom) + 'px' : '';
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -478,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
           '</div>' +
           '<div class="bw-svg-frame" style="width:100%;height:90px;">' + s.svg + '</div>' +
           '<h4 style="margin-top:10px;">Project Complete!</h4>' +
-          '<p>Built in Ghana.<br>Proven on site.</p>' +
+          '<p>Today&#39;s Work,<br>Tomorrow&#39;s Heritage.</p>' +
           '<button class="bw-rebuild-btn" id="bwRebuildBtn">Build Again</button>' +
         '</div>';
       document.getElementById('bwRebuildBtn').addEventListener('click', function () {

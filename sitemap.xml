@@ -5,7 +5,7 @@
   <!-- Homepage — highest priority -->
   <url>
     <loc>https://kcedynamics.com/</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/" />
@@ -25,7 +25,7 @@
   <!-- About — brand and E-E-A-T signal -->
   <url>
     <loc>https://kcedynamics.com/about.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://kcedynamics.com/about.html" />

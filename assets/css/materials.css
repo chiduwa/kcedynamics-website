@@ -36,7 +36,8 @@
 .page-hero,
 .cta-banner,
 .about-teaser__box,
-.about-teaser__box.fx-glass {
+.about-teaser__box.fx-glass,
+.statement-card {
   background-color: var(--charcoal);
   background-image: linear-gradient(110deg, rgba(20,24,22,.68), rgba(27,31,29,.48)), var(--steel-texture);
   background-size: auto, max(100%, 1400px) auto;
@@ -133,6 +134,8 @@
   border-color: #c3c5bd;
   box-shadow: 0 1px 1px rgba(255,255,255,.7) inset, 0 3px 10px rgba(41,44,35,.07);
 }
+/* Keep the brass accent edge the value cards were designed with. */
+.value-card { border-left-color: var(--gold); }
 .contact-form {
   background-color: var(--concrete);
   background-image: linear-gradient(rgba(238,239,232,.82), rgba(238,239,232,.82)), var(--concrete-texture);
