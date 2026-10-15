@@ -7,9 +7,9 @@
   const requested = params.get('service');
   if ([...service.options].some(option => option.value === requested)) service.value = requested;
   const packages = {
-    'one-bedroom': 'One-bedroom bungalow / 55 m² / indicative main-building budget GH₵265,000–360,000',
-    'two-bedroom': 'Two-bedroom bungalow / 85 m² / indicative main-building budget GH₵410,000–555,000',
-    'three-bedroom': 'Three-bedroom bungalow / 110 m² / indicative main-building budget GH₵530,000–715,000'
+    'one-bedroom': 'One-bedroom bungalow / 55 m² (approx. 592 sq ft) / indicative main-building budget GH₵298,000–360,000',
+    'two-bedroom': 'Two-bedroom bungalow / 85 m² (approx. 915 sq ft) / indicative main-building budget GH₵461,000–555,000',
+    'three-bedroom': 'Three-bedroom bungalow / 110 m² (approx. 1,184 sq ft) / indicative main-building budget GH₵596,000–715,000'
   };
   const lines = [];
   if (packages[params.get('package')]) lines.push('Package of interest: ' + packages[params.get('package')]);
