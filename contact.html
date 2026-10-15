@@ -380,7 +380,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
         <li class="nav__item"><a href="projects.html" class="nav__link">Projects</a></li>
         <li class="nav__item"><a href="contact.html" class="nav__link active">Contact</a></li>
-        <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
+        <li class="nav__item"><a href="homes.html" class="nav__link">Build a Home</a></li>
         <li class="nav__item nav__item--mobile"><a href="https://app.kcedynamics.com" class="nav__link" target="_blank" rel="noopener">Staff Portal</a></li>
       </ul>
       <div class="nav__cta">
@@ -504,7 +504,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Contact Form -->
       <div>
-        <form class="contact-form" id="contactForm" novalidate
+        <form class="contact-form" id="contactForm"
               action="https://formsubmit.co/info@kcedynamics.com"
               method="POST">
 
@@ -544,6 +544,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <label for="service">Service Required</label>
             <select id="service" name="service">
               <option value="">Select a service…</option>
+              <option value="home-build">Homebuilding Package / Design Reference</option>
+              <option value="diaspora">Diaspora Mortgage Information &amp; Project Support</option>
+              <option value="completion">Unfinished Home Assessment</option>
               <option value="design">Design &amp; Development</option>
               <option value="supervision">Construction Supervision</option>
               <option value="analysis">Technical Analysis &amp; Reporting</option>
@@ -558,7 +561,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="form-group">
-            <label for="message">Project Description *</label>
+            <label for="country">Country of Residence (optional)</label><input type="text" id="country" name="country" autocomplete="country-name" placeholder="e.g. Ghana, United States, United Kingdom" />
+          </div><div class="form-group"><label for="home-stage">Land / Building Stage (optional)</label><select id="home-stage" name="home_stage"><option value="">Select if relevant…</option><option>I own land</option><option>I am arranging land</option><option>My house is partly built</option><option>I want to buy a completed home</option></select>
+          </div><div class="form-group"><label for="message">Project Description *</label>
             <textarea id="message" name="message" required placeholder="Tell us about your project — what you're building, where, and when you'd like to start…"></textarea>
           </div>
 
@@ -570,6 +575,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p style="margin-top:14px;font-size:.8125rem;color:var(--gray-400);text-align:center;">
             Or email directly: <!--email_off--><a href="mailto:info@kcedynamics.com" style="color:var(--gold);">info@kcedynamics.com</a><!--/email_off-->
           </p>
+        <p style="margin-top:16px;font-size:.85rem;">Please share project details only. Send financial and identity documents directly through your bank’s secure process. KCE will use your enquiry to respond; we will ask your permission before sharing it with a bank.</p>
         </form>
 
         <!-- Success message — shown when ?sent=1 is in the URL -->
@@ -648,6 +654,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <div class="footer__col-title">Services</div>
         <ul class="footer__links">
+          <li><a href="homes.html">Home Packages &amp; Designs</a></li>
           <li><a href="services.html#design">Design &amp; Development</a></li>
           <li><a href="services.html#supervision">Construction Supervision</a></li>
           <li><a href="services.html#analysis">Technical Analysis</a></li>
@@ -688,5 +695,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="assets/js/consent.js?v=20260924"></script>
 <script src="assets/js/main.js?v=20261008b"></script>
 <script src="assets/js/fx.js?v=20260924b" defer></script>
+<script src="assets/js/home-enquiry.js?v=20261015" defer></script>
 </body>
 </html>
