@@ -232,6 +232,7 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap; /* "Build a Home" wrapped to two lines at 1101-1600px */
   padding: 8px 14px;
   font-size: .8125rem;
   font-weight: 600;
