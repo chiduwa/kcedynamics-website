@@ -37,7 +37,9 @@ RewriteRule ^services/?$ /services.html [R=301,L]
 RewriteRule ^projects/?$ /projects.html [R=301,L]
 
 # Careers now lives alongside company information. Original query strings are retained.
-RewriteRule ^careers\.html$ /about.html#careers [R=301,L,NE]
+RewriteCond %{QUERY_STRING} !^$
+RewriteRule ^careers\.html$ /about.html?%{QUERY_STRING}#careers [R=301,L,NE]
+RewriteRule ^careers\.html$ /about.html#careers [R=301,L,NE,QSD]
 
 # ── 3. Security headers ──────────────────────────
 <IfModule mod_headers.c>
