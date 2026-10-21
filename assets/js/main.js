@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (hamburger && navMenu) {
     const siteHeader = document.querySelector('.site-header');
+    const closeMenu = () => {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
+      navMenu.classList.remove('mobile-open');
+      navMenu.style.top = '';
+      document.body.style.overflow = '';
+    };
     hamburger.addEventListener('click', () => {
       const isOpen = navMenu.classList.toggle('mobile-open');
       // Open below the header's real bottom edge: on tablets the top bar is
@@ -21,20 +29,26 @@ document.addEventListener('DOMContentLoaded', () => {
       navMenu.style.top = isOpen && siteHeader ? Math.round(siteHeader.getBoundingClientRect().bottom) + 'px' : '';
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
     document.addEventListener('click', e => {
       if (!e.target.closest('.nav') && navMenu.classList.contains('mobile-open')) {
-        hamburger.classList.remove('open');
-        navMenu.classList.remove('mobile-open');
-        document.body.style.overflow = '';
+        closeMenu();
       }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navMenu.classList.contains('mobile-open')) {
+        closeMenu();
+        hamburger.focus();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1100) closeMenu();
     });
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        navMenu.classList.remove('mobile-open');
-        document.body.style.overflow = '';
+        closeMenu();
       });
     });
   }
@@ -152,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fileNameEl) fileNameEl.textContent = name;
         if (uploadArea) uploadArea.classList.add('has-file');
       } else {
-        if (fileNameEl) fileNameEl.textContent = 'PDF, DOC, or DOCX — max 5 MB';
+        if (fileNameEl) fileNameEl.textContent = 'PDF, DOC, or DOCX, up to 5 MB';
         if (uploadArea) uploadArea.classList.remove('has-file');
       }
     });
@@ -188,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const waHTML = `
   <div class="wa-widget" role="complementary" aria-label="WhatsApp chat">
     <div class="wa-tooltip">Chat with us on WhatsApp</div>
-    <a href="https://wa.me/233209970207?text=Hello%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20KCE%20Dynamics."
+    <a href="https://wa.me/233202086370?text=Hello%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20KCE%20Dynamics."
        target="_blank" rel="noopener noreferrer"
        class="wa-btn" aria-label="Open WhatsApp chat with KCE Dynamics">
       <span class="wa-pulse"></span>
@@ -235,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drainage: {
       title: 'Civil & Drainage Engineering',
       icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M2 12h20"/></svg>`,
-      text: 'From hydrological analysis to completed drainage infrastructure — we design and build storm-water systems that last.'
+      text: 'We assess rainfall and site conditions, then design and build drainage for your site.'
     },
     retaining: {
       title: 'Structural Engineering',
@@ -245,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     other: {
       title: 'Consultation & Analysis',
       icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
-      text: 'Not sure where to start? We begin every engagement with a site visit and data review — no obligation to proceed.'
+      text: 'Not sure where to start? Tell us about your site and plans. We can help you work out where to begin.'
     }
   };
 
@@ -410,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var bwStages = [
     {
       label: 'The Blueprint',
-      svg: '<svg viewBox="0 0 140 110" xmlns="http://www.w3.org/2000/svg"><rect width="140" height="110" fill="#1B3A5C"/><line x1="20" y1="0" x2="20" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="40" y1="0" x2="40" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="60" y1="0" x2="60" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="80" y1="0" x2="80" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="100" y1="0" x2="100" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="120" y1="0" x2="120" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="20" x2="140" y2="20" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="40" x2="140" y2="40" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="60" x2="140" y2="60" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="80" x2="140" y2="80" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="100" x2="140" y2="100" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><polyline points="23,34 70,13 117,34" fill="none" stroke="#64B4FF" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="28" y="32" width="84" height="68" fill="none" stroke="#64B4FF" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="22" y="100" width="96" height="6" fill="none" stroke="rgba(100,180,255,.6)" stroke-width="1" stroke-dasharray="3,2"/><rect x="36" y="46" width="20" height="16" fill="none" stroke="rgba(100,180,255,.5)" stroke-width="1" stroke-dasharray="3,2"/><rect x="84" y="46" width="20" height="16" fill="none" stroke="rgba(100,180,255,.5)" stroke-width="1" stroke-dasharray="3,2"/><rect x="60" y="74" width="20" height="26" fill="none" stroke="rgba(100,180,255,.5)" stroke-width="1" stroke-dasharray="3,2"/><text x="70" y="8" font-size="4.5" fill="rgba(100,180,255,.55)" text-anchor="middle" font-family="monospace">ELEVATION — KCE DYNAMICS</text></svg>',
+      svg: '<svg viewBox="0 0 140 110" xmlns="http://www.w3.org/2000/svg"><rect width="140" height="110" fill="#1B3A5C"/><line x1="20" y1="0" x2="20" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="40" y1="0" x2="40" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="60" y1="0" x2="60" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="80" y1="0" x2="80" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="100" y1="0" x2="100" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="120" y1="0" x2="120" y2="110" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="20" x2="140" y2="20" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="40" x2="140" y2="40" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="60" x2="140" y2="60" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="80" x2="140" y2="80" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><line x1="0" y1="100" x2="140" y2="100" stroke="rgba(100,180,255,.14)" stroke-width=".6"/><polyline points="23,34 70,13 117,34" fill="none" stroke="#64B4FF" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="28" y="32" width="84" height="68" fill="none" stroke="#64B4FF" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="22" y="100" width="96" height="6" fill="none" stroke="rgba(100,180,255,.6)" stroke-width="1" stroke-dasharray="3,2"/><rect x="36" y="46" width="20" height="16" fill="none" stroke="rgba(100,180,255,.5)" stroke-width="1" stroke-dasharray="3,2"/><rect x="84" y="46" width="20" height="16" fill="none" stroke="rgba(100,180,255,.5)" stroke-width="1" stroke-dasharray="3,2"/><rect x="60" y="74" width="20" height="26" fill="none" stroke="rgba(100,180,255,.5)" stroke-width="1" stroke-dasharray="3,2"/><text x="70" y="8" font-size="4.5" fill="rgba(100,180,255,.55)" text-anchor="middle" font-family="monospace">ELEVATION · KCE DYNAMICS</text></svg>',
       btn: 'Break Ground →'
     },
     {

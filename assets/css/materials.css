@@ -199,3 +199,24 @@
     --steel-texture: url('../images/textures/weathered-steel-v1-sm.webp');
   }
 }
+
+/* Clear, shared navigation and in-page links. */
+.nav__menu { flex: 0 1 auto; margin-left: auto; }
+.nav__item--mobile { display: none; }
+.section-links { border-bottom: 1px solid var(--border); background: var(--off-white); }
+.section-links .container, .section-links--inline { display: flex; flex-wrap: wrap; gap: 12px 26px; padding-top: 20px; padding-bottom: 20px; }
+.section-links a { color: var(--teal); font-size: .875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.section-links--inline { justify-content: center; margin: 28px 0 0; background: transparent; }
+.section-links a:focus-visible, .nav a:focus-visible, .nav__hamburger:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+main [id] { scroll-margin-top: 100px; }
+.enquiry-note { padding: 22px; margin-top: 24px; border-left: 3px solid var(--gold); background: var(--off-white); }
+.enquiry-note h3 { font-size: 1rem; margin-bottom: 10px; }
+.enquiry-note p { font-size: .9rem; line-height: 1.7; color: var(--text-mid); margin: 0; }
+@media (max-width: 1100px) {
+  .nav__item--mobile { display: block; }
+  .nav__menu.mobile-open { margin-left: 0; gap: 8px; overflow-y: auto; bottom: 0; }
+  .nav__menu.mobile-open .nav__link { padding: 14px 20px; }
+}
+
+/* Keep one contact shortcut instead of three competing floating widgets. */
+.bw-widget, .ps-widget { display: none; }

@@ -36,6 +36,9 @@ RewriteRule ^contact-us/?$ /contact.html [R=301,L]
 RewriteRule ^services/?$ /services.html [R=301,L]
 RewriteRule ^projects/?$ /projects.html [R=301,L]
 
+# Careers now lives alongside company information. Original query strings are retained.
+RewriteRule ^careers\.html$ /about.html#careers [R=301,L,NE]
+
 # ── 3. Security headers ──────────────────────────
 <IfModule mod_headers.c>
   Header always set Content-Security-Policy "upgrade-insecure-requests; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
